@@ -27,9 +27,7 @@
           <p>佣金: {{ tokenFee }} ETH</p>
           <p>Gas Fee: </p>
         </Card>
-        <a-button type="primary" :disabled="!agreement" block @click="deployContract"
-          >确认</a-button
-        >
+        <Button type="primary" :disabled="!agreement" block @click="deployContract">确认</Button>
       </Col>
     </Row>
   </PageWrapper>
@@ -39,7 +37,7 @@
   import { useRouter } from 'vue-router';
   import { PageWrapper } from '/@/components/Page';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { Row, Col, Card, Checkbox } from 'ant-design-vue';
+  import { Button, Row, Col, Card, Checkbox } from 'ant-design-vue';
   import { useMessage } from '/@/hooks/web/useMessage';
   import {
     basicSchemas,
@@ -58,11 +56,12 @@
   import { useBlockchainStore } from '/@/store/modules/blockchain';
 
   const blockchainStore = useBlockchainStore();
+  const serviceAddress = ref(blockchainStore.serviceReceiverContractAddress);
   const { replace } = useRouter();
-  const serviceReceiverContractAddress = ref();
   const { warning } = useMessage().createMessage;
   const tokenFee = ref('0');
   const agreement = ref(false);
+  const selectTokenType = ref('SimpleERC20');
   const [
     reg1,
     { getFieldsValue: getTokenInfo, setFieldsValue, validateFields: validateTokenInfo },
@@ -136,12 +135,9 @@
     },
   };
 
-  const selectTokenType = ref('SimpleERC20');
-
   onMounted(() => {
     updateSchema({ field: 'tokenType', componentProps: { onChange: onChangeTokenType } });
     requestTokenFee(selectTokenType.value);
-    serviceReceiverContractAddress.value = blockchainStore.getAddr;
   });
 
   // 获取选择的token合约信息
@@ -152,25 +148,13 @@
     let { tokenName, tokenSymbol, tokenDecimals, initialSupply, totalSupply } = getTokenInfo();
     switch (selectTokenType.value) {
       case 'HelloERC20':
-        return [tokenName, tokenSymbol, serviceReceiverContractAddress.value];
+        return [tokenName, tokenSymbol, serviceAddress.value];
       case 'SimpleERC20':
-        return [tokenName, tokenSymbol, initialSupply, serviceReceiverContractAddress.value];
+        return [tokenName, tokenSymbol, initialSupply, serviceAddress.value];
       case 'StandardERC20':
-        return [
-          tokenName,
-          tokenSymbol,
-          tokenDecimals,
-          initialSupply,
-          serviceReceiverContractAddress.value,
-        ];
+        return [tokenName, tokenSymbol, tokenDecimals, initialSupply, serviceAddress.value];
       case 'BurnableERC20':
-        return [
-          tokenName,
-          tokenSymbol,
-          tokenDecimals,
-          initialSupply,
-          serviceReceiverContractAddress.value,
-        ];
+        return [tokenName, tokenSymbol, tokenDecimals, initialSupply, serviceAddress.value];
       case 'MintableERC20':
         return [
           tokenName,
@@ -178,16 +162,10 @@
           tokenDecimals,
           totalSupply,
           initialSupply,
-          serviceReceiverContractAddress.value,
+          serviceAddress.value,
         ];
       case 'PausableERC20':
-        return [
-          tokenName,
-          tokenSymbol,
-          tokenDecimals,
-          initialSupply,
-          serviceReceiverContractAddress.value,
-        ];
+        return [tokenName, tokenSymbol, tokenDecimals, initialSupply, serviceAddress.value];
       case 'CommonERC20':
         return [
           tokenName,
@@ -195,24 +173,12 @@
           tokenDecimals,
           totalSupply,
           initialSupply,
-          serviceReceiverContractAddress.value,
+          serviceAddress.value,
         ];
       case 'UnlimitedERC20':
-        return [
-          tokenName,
-          tokenSymbol,
-          tokenDecimals,
-          initialSupply,
-          serviceReceiverContractAddress.value,
-        ];
+        return [tokenName, tokenSymbol, tokenDecimals, initialSupply, serviceAddress.value];
       case 'AmazingERC20':
-        return [
-          tokenName,
-          tokenSymbol,
-          tokenDecimals,
-          initialSupply,
-          serviceReceiverContractAddress.value,
-        ];
+        return [tokenName, tokenSymbol, tokenDecimals, initialSupply, serviceAddress.value];
       case 'PowerfulERC20':
         return [
           tokenName,
@@ -220,7 +186,7 @@
           tokenDecimals,
           totalSupply,
           initialSupply,
-          serviceReceiverContractAddress.value,
+          serviceAddress.value,
         ];
       default:
         return [];
@@ -254,7 +220,7 @@
 
   function toManageContractPage(contractAddr: string, contractAbi: Array<any>) {
     replace({
-      name: 'manage',
+      name: 'erc20Manage',
       params: {
         contractAddr,
         contractAbi: JSON.stringify(contractAbi),
@@ -263,7 +229,7 @@
   }
 
   function requestTokenFee(serviceName: string) {
-    getTokenFee(serviceReceiverContractAddress.value, ServiceReceiver.abi, serviceName)
+    getTokenFee(serviceAddress.value, ServiceReceiver.abi, serviceName)
       .then((price: string) => {
         tokenFee.value = price;
       })

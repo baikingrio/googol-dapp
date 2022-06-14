@@ -1,10 +1,10 @@
 {
-  "name": "vben-admin",
-  "version": "2.8.0",
+  "name": "googol-dapp",
+  "version": "0.0.0",
   "author": {
-    "name": "vben",
-    "email": "anncwb@126.com",
-    "url": "https://github.com/anncwb"
+    "name": "quinn",
+    "email": "baikingrio@gmail.com",
+    "url": "https://github.com/baikingrio"
   },
   "scripts": {
     "bootstrap": "yarn install",
@@ -140,13 +140,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anncwb/vue-vben-admin.git"
+    "url": "git+https://github.com/baikingrio/googol-dapp.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/anncwb/vue-vben-admin/issues"
+    "url": "https://github.com/baikingrio/googol-dapp/issues"
   },
-  "homepage": "https://github.com/anncwb/vue-vben-admin",
+  "homepage": "https://github.com/baikingrio/googol-dapp",
   "engines": {
     "node": "^12 || >=14"
   }

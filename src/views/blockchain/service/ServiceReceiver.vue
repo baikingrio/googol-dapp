@@ -7,33 +7,33 @@
 <template>
   <PageWrapper title="ERC20代币服务" content="设置不同类型ERC20代币的创建费用">
     <p>服务合约地址：{{ contractAddress }}</p>
-    <a-button @click="onDeploy">部署ERC20代币服务合约</a-button>
-    <a-button @click="onSetPrice">设置价格</a-button>
-    <a-button @click="onGetPrice">获取价格</a-button>
-    <a-button @click="getContractBalance">查询合约eth余额</a-button>
+    <Button @click="onDeploy">部署ERC20代币服务合约</Button>
+    <Button @click="onSetPrice">设置价格</Button>
+    <Button @click="onGetPrice">获取价格</Button>
+    <Button @click="getContractBalance">查询合约eth余额</Button>
   </PageWrapper>
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted } from 'vue';
+  import { ref } from 'vue';
+  import { Button } from 'ant-design-vue';
   import { ethers } from 'ethers';
   import { PageWrapper } from '/@/components/Page';
   import { useBlockchainStore } from '/@/store/modules/blockchain';
+  import { deployTokenContract } from '../token/web3utils';
   import ServiceReceiver from '../../../../googol-dapp-contract/artifacts/contracts/service/ServiceReceiver.sol/ServiceReceiver.json';
 
-  const contractAddress = ref('');
+  const blockchainStore = useBlockchainStore();
+  const contractAddress = ref(blockchainStore.serviceReceiverContractAddress);
   const serviceName = 'SimpleERC20';
   const price = '0.03';
 
-  const blockchainStore = useBlockchainStore();
-
-  onMounted(() => {
-    contractAddress.value = blockchainStore.getAddr;
-  });
-
   function onDeploy() {
-    // console.log('部署', blockchainStore.getAddr);
-    blockchainStore.setServiceReceiverContractAddress(contractAddress);
+    deployTokenContract(ServiceReceiver, [], '').then((contract) => {
+      console.log('部署成功', contract.address);
+      contractAddress.value = contract.address;
+      blockchainStore.setServiceReceiverContractAddress(contractAddress.value);
+    });
   }
 
   async function onSetPrice() {

@@ -16,6 +16,6 @@ contract HelloERC20 is ERC20, ServicePayer, GeneratorCopyright("v1.0.0") {
     ServicePayer(feeReceiver, "HelloERC20")
     payable
   {
-    _mint(_msgSender(), 10000 * (10**uint256(decimals())));
+    _mint(_msgSender(), 10000 * 10 ** decimals());
   }
 }

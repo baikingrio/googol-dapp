@@ -51,21 +51,40 @@ export function requestAccounts(): Promise<string[]> {
   });
 }
 
-export function deployTokenContract(contract: any, contractParams: any[], serviceFee: string) {
+export async function deployTokenContract(
+  contract: any,
+  contractParams: any[],
+  serviceFee: string,
+) {
   const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
   const factory = new ethers.ContractFactory(
     contract.abi,
     contract.bytecode,
     web3Provider.getSigner(),
   );
-  return factory.deploy(...contractParams, {
-    value: ethers.utils.parseEther(serviceFee),
-    gasLimit: 4100000,
-  });
+  const deployParams = contractParams;
+  if (serviceFee != '') {
+    deployParams.push({
+      value: ethers.utils.parseEther(serviceFee),
+      gasLimit: 4100000,
+    });
+  }
+
+  const tx = await factory.deploy(...deployParams);
+
+  return tx.deployed();
+  // return factory.deploy(...deployParams);
+  // return factory.deploy(...contractParams, {
+  //   value: ethers.utils.parseEther(serviceFee),
+  //   gasLimit: 4100000,
+  // });
 }
 
 export function getTokenFee(serviceReceiverAddr, serviceReceiverAbi, serviceName: string) {
-  const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+  if (!serviceReceiverAddr) {
+    return Promise.reject('serviceReceiverAddr is null');
+  }
+  const web3Provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
   return web3Provider.getCode(serviceReceiverAddr).then((ret) => {
     if ('0x' == ret) {
       return Promise.reject('serviceReceiver合约未部署');

@@ -1,451 +1,417 @@
 import { expect } from "chai";
-import { BN, constants, expectEvent, expectRevert } from "@openzeppelin/test-helpers";
-import { Wallet } from "ethers";
-const { ZERO_ADDRESS } = constants 
-
-export function shouldBehaveLikeERC20 (name: String, symbol: String, decimals: Number, initialBalance: Number, [owner, other, thirdParty]: Wallet[]) {
-  it('has a name', async function () {
-    expect(await this.token.name()).be.equal(name)
-  })
-
-  it('has a symbol', async function () {
-    expect(await this.token.symbol()).be.equal(symbol)
-  })
-
-  it('has an amount of decimals', async function () {
-    expect(await this.token.decimals()).to.be.equal(decimals)
-  })
-
-//   describe('total supply', function () {
-//     it('returns the total amount of tokens', async function () {
-//         expect(await this.token.totalSupply()).to.be.equal(initialBalance)
-//     })
-//   })
-
-  describe('balanceOf', function () {
-    // describe('when the requested account has no tokens', function () {
-    //   it('returns zero', async function () {
-          
-          
-    //     expect(await this.token.balanceOf(other.address)).be.equal(new BN(0))
-    //   })
-    // })
-
-//     describe('when the requested account has some tokens', function () {
-//       it('returns the total amount of tokens', async function () {
-//         (await this.token.balanceOf(owner)).should.be.bignumber.equal(initialBalance)
-//       })
-//     })
-//   })
-
-//   describe('transfer', function () {
-//     describe('when the recipient is not the zero address', function () {
-//       const to = thirdParty
-
-//       describe('when the sender does not have enough balance', function () {
-//         const amount = initialBalance.addn(1)
-
-//         it('reverts', async function () {
-//           await expectRevert(
-//             this.token.transfer(to, amount, { from: owner }),
-//             'ERC20: transfer amount exceeds balance'
-//           )
-//         })
-//       })
-
-//       describe('when the sender has enough balance', function () {
-//         const amount = initialBalance
-
-//         it('transfers the requested amount', async function () {
-//           await this.token.transfer(to, amount, { from: owner })
-//           const ownerBalance = await this.token.balanceOf(owner)
-//           const toBalance = await this.token.balanceOf(to)
-
-//           expect(ownerBalance.toString()).to.be.bignumber.equal('0')
-//           expect(toBalance.toString()).to.be.bignumber.equal(amount.toString())
-//         })
-
-//         it('emits a transfer event', async function () {
-//           const { logs } = await this.token.transfer(to, amount, { from: owner })
-
-//           expectEvent.inLogs(logs, 'Transfer', {
-//             from: owner,
-//             to: to,
-//             value: amount,
-//           })
-//         })
-//       })
-//     })
-
-//     describe('when the recipient is the zero address', function () {
-//       const to = ZERO_ADDRESS
-
-//       it('reverts', async function () {
-//         await expectRevert(
-//           this.token.transfer(to, initialBalance, { from: owner }),
-//           'ERC20: transfer to the zero address'
-//         )
-//       })
-//     })
-//   })
-
-//   describe('approve', function () {
-//     describe('when the spender is not the zero address', function () {
-//       const spender = thirdParty
-
-//       describe('when the sender has enough balance', function () {
-//         const amount = initialBalance
-
-//         it('emits an approval event', async function () {
-//           const { logs } = await this.token.approve(spender, amount, { from: owner })
-
-//           expectEvent.inLogs(logs, 'Approval', {
-//             owner: owner,
-//             spender: spender,
-//             value: amount,
-//           })
-//         })
-
-//         describe('when there was no approved amount before', function () {
-//           it('approves the requested amount', async function () {
-//             await this.token.approve(spender, amount, { from: owner })
-//             const allowance = await this.token.allowance(owner, spender)
-
-//             expect(allowance.toString()).to.be.bignumber.equal(amount.toString())
-//           })
-//         })
-
-//         describe('when the spender had an approved amount', function () {
-//           beforeEach(async function () {
-//             await this.token.approve(spender, 1, { from: owner })
-//           })
-
-//           it('approves the requested amount and replaces the previous one', async function () {
-//             await this.token.approve(spender, amount, { from: owner })
-//             const allowance = await this.token.allowance(owner, spender)
-
-//             expect(allowance.toString()).to.be.bignumber.equal(amount.toString())
-//           })
-//         })
-//       })
-
-//       describe('when the sender does not have enough balance', function () {
-//         const amount = initialBalance.addn(1)
-
-//         it('emits an approval event', async function () {
-//           const { logs } = await this.token.approve(spender, amount, { from: owner })
-
-//           expectEvent.inLogs(logs, 'Approval', {
-//             owner: owner,
-//             spender: spender,
-//             value: amount,
-//           })
-//         })
-
-//         describe('when there was no approved amount before', function () {
-//           it('approves the requested amount', async function () {
-//             await this.token.approve(spender, amount, { from: owner })
-//             const allowance = await this.token.allowance(owner, spender)
-
-//             expect(allowance.toString()).to.be.bignumber.equal(amount.toString())
-//           })
-//         })
-
-//         describe('when the spender had an approved amount', function () {
-//           beforeEach(async function () {
-//             await this.token.approve(spender, 1, { from: owner })
-//           })
-
-//           it('approves the requested amount and replaces the previous one', async function () {
-//             await this.token.approve(spender, amount, { from: owner })
-//             const allowance = await this.token.allowance(owner, spender)
-
-//             expect(allowance.toString()).to.be.bignumber.equal(amount.toString())
-//           })
-//         })
-//       })
-//     })
-
-//     describe('when the spender is the zero address', function () {
-//       const amount = initialBalance
-//       const spender = ZERO_ADDRESS
-
-//       it('reverts', async function () {
-//         await expectRevert(
-//           this.token.approve(spender, amount, { from: owner }),
-//           'ERC20: approve to the zero address'
-//         )
-//       })
-//     })
-  })
-
-//   describe('transfer from', function () {
-//     const spender = thirdParty
-
-//     describe('when the recipient is not the zero address', function () {
-//       const to = other
-
-//       describe('when the spender has enough approved balance', function () {
-//         beforeEach(async function () {
-//           await this.token.approve(spender, initialBalance, { from: owner })
-//         })
-
-//         describe('when the owner has enough balance', function () {
-//           const amount = initialBalance
-
-//           it('transfers the requested amount', async function () {
-//             await this.token.transferFrom(owner, to, amount, { from: spender })
-//             const ownerBalance = await this.token.balanceOf(owner)
-//             const toBalance = await this.token.balanceOf(to)
-
-//             expect(ownerBalance.toString()).to.be.bignumber.equal('0')
-//             expect(toBalance.toString()).to.be.bignumber.equal(amount.toString())
-//           })
-
-//           it('decreases the spender allowance', async function () {
-//             await this.token.transferFrom(owner, to, amount, { from: spender })
-//             const allowance = await this.token.allowance(owner, spender)
-
-//             expect(allowance.toString()).to.be.bignumber.equal('0')
-//           })
-
-//           it('emits a transfer event', async function () {
-//             const { logs } = await this.token.transferFrom(owner, to, amount, { from: spender })
-
-//             expectEvent.inLogs(logs, 'Transfer', {
-//               from: owner,
-//               to: to,
-//               value: amount,
-//             })
-//           })
-//         })
-
-//         describe('when the owner does not have enough balance', function () {
-//           const amount = initialBalance.addn(1)
-
-//           it('reverts', async function () {
-//             await expectRevert(
-//               this.token.transferFrom(owner, to, amount, { from: spender }),
-//               'ERC20: transfer amount exceeds balance'
-//             )
-//           })
-//         })
-//       })
-
-//       describe('when the spender does not have enough approved balance', function () {
-//         beforeEach(async function () {
-//           await this.token.approve(spender, 99, { from: owner })
-//         })
-
-//         describe('when the owner has enough balance', function () {
-//           const amount = initialBalance
-
-//           it('reverts', async function () {
-//             await expectRevert(
-//               this.token.transferFrom(owner, to, amount, { from: spender }),
-//               'ERC20: transfer amount exceeds allowance'
-//             )
-//           })
-//         })
-
-//         describe('when the owner does not have enough balance', function () {
-//           const amount = initialBalance.addn(1)
-
-//           it('reverts', async function () {
-//             await expectRevert(
-//               this.token.transferFrom(owner, to, amount, { from: spender }),
-//               'ERC20: transfer amount exceeds balance'
-//             )
-//           })
-//         })
-//       })
-//     })
-
-//     describe('when the recipient is the zero address', function () {
-//       const amount = initialBalance
-//       const to = ZERO_ADDRESS
-
-//       beforeEach(async function () {
-//         await this.token.approve(spender, amount, { from: owner })
-//       })
-
-//       it('reverts', async function () {
-//         await expectRevert(
-//           this.token.transferFrom(owner, to, amount, { from: spender }),
-//           'ERC20: transfer to the zero address'
-//         )
-//       })
-//     })
-//   })
-
-//   describe('decrease allowance', function () {
-//     describe('when the spender is not the zero address', function () {
-//       const spender = thirdParty
-
-//       function shouldDecreaseApproval (amount) {
-//         describe('when there was no approved amount before', function () {
-//           it('reverts', async function () {
-//             await expectRevert(
-//               this.token.decreaseAllowance(spender, amount, { from: owner }),
-//               'ERC20: decreased allowance below zero'
-//             )
-//           })
-//         })
-
-//         describe('when the spender had an approved amount', function () {
-//           const approvedAmount = amount
-
-//           beforeEach(async function () {
-//             ({ logs: this.logs } = await this.token.approve(spender, approvedAmount, { from: owner }))
-//           })
-
-//           it('emits an approval event', async function () {
-//             const { logs } = await this.token.decreaseAllowance(spender, approvedAmount, { from: owner })
-
-//             expectEvent.inLogs(logs, 'Approval', {
-//               owner: owner,
-//               spender: spender,
-//               value: new BN(0),
-//             })
-//           })
-
-//           it('decreases the spender allowance subtracting the requested amount', async function () {
-//             await this.token.decreaseAllowance(spender, approvedAmount.subn(1), { from: owner })
-//             const allowance = await this.token.allowance(owner, spender)
-
-//             expect(allowance.toString()).to.be.bignumber.equal('1')
-//           })
-
-//           it('sets the allowance to zero when all allowance is removed', async function () {
-//             await this.token.decreaseAllowance(spender, approvedAmount, { from: owner })
-//             const allowance = await this.token.allowance(owner, spender)
-
-//             expect(allowance.toString()).to.be.bignumber.equal('0')
-//           })
-
-//           it('reverts when more than the full allowance is removed', async function () {
-//             await expectRevert(
-//               this.token.decreaseAllowance(spender, approvedAmount.addn(1), { from: owner }),
-//               'ERC20: decreased allowance below zero',
-//             )
-//           })
-//         })
-//       }
-
-//       describe('when the sender has enough balance', function () {
-//         const amount = initialBalance
-
-//         shouldDecreaseApproval(amount)
-//       })
-
-//       describe('when the sender does not have enough balance', function () {
-//         const amount = initialBalance.addn(1)
-
-//         shouldDecreaseApproval(amount)
-//       })
-//     })
-
-//     describe('when the spender is the zero address', function () {
-//       const amount = initialBalance
-//       const spender = ZERO_ADDRESS
-
-//       it('reverts', async function () {
-//         await expectRevert(
-//           this.token.decreaseAllowance(spender, amount, { from: owner }),
-//           'ERC20: decreased allowance below zero'
-//         )
-//       })
-//     })
-//   })
-
-//   describe('increase allowance', function () {
-//     const amount = initialBalance
-
-//     describe('when the spender is not the zero address', function () {
-//       const spender = thirdParty
-
-//       describe('when the sender has enough balance', function () {
-//         it('emits an approval event', async function () {
-//           const { logs } = await this.token.increaseAllowance(spender, amount, { from: owner })
-
-//           expectEvent.inLogs(logs, 'Approval', {
-//             owner: owner,
-//             spender: spender,
-//             value: amount,
-//           })
-//         })
-
-//         describe('when there was no approved amount before', function () {
-//           it('approves the requested amount', async function () {
-//             await this.token.increaseAllowance(spender, amount, { from: owner })
-//             const allowance = await this.token.allowance(owner, spender)
-
-//             expect(allowance.toString()).to.be.bignumber.equal(amount.toString())
-//           })
-//         })
-
-//         describe('when the spender had an approved amount', function () {
-//           beforeEach(async function () {
-//             await this.token.approve(spender, 1, { from: owner })
-//           })
-
-//           it('increases the spender allowance adding the requested amount', async function () {
-//             await this.token.increaseAllowance(spender, amount, { from: owner })
-//             const allowance = await this.token.allowance(owner, spender)
-//             const newAmount = amount.addn(1)
-
-//             expect(allowance.toString()).to.be.bignumber.equal(newAmount.toString())
-//           })
-//         })
-//       })
-
-//       describe('when the sender does not have enough balance', function () {
-//         const amount = initialBalance.addn(1)
-
-//         it('emits an approval event', async function () {
-//           const { logs } = await this.token.increaseAllowance(spender, amount, { from: owner })
-
-//           expectEvent.inLogs(logs, 'Approval', {
-//             owner: owner,
-//             spender: spender,
-//             value: amount,
-//           })
-//         })
-
-//         describe('when there was no approved amount before', function () {
-//           it('approves the requested amount', async function () {
-//             await this.token.increaseAllowance(spender, amount, { from: owner })
-//             const allowance = await this.token.allowance(owner, spender)
-
-//             expect(allowance.toString()).to.be.bignumber.equal(amount.toString())
-//           })
-//         })
-
-//         describe('when the spender had an approved amount', function () {
-//           beforeEach(async function () {
-//             await this.token.approve(spender, 1, { from: owner })
-//           })
-
-//           it('increases the spender allowance adding the requested amount', async function () {
-//             await this.token.increaseAllowance(spender, amount, { from: owner })
-//             const allowance = await this.token.allowance(owner, spender)
-//             const newAmount = amount.addn(1)
-
-//             expect(allowance.toString()).to.be.bignumber.equal(newAmount.toString())
-//           })
-//         })
-//       })
-//     })
-
-//     describe('when the spender is the zero address', function () {
-//       const spender = ZERO_ADDRESS
-
-//       it('reverts', async function () {
-//         await expectRevert(
-//           this.token.increaseAllowance(spender, amount, { from: owner }),
-//           'ERC20: approve to the zero address'
-//         )
-//       })
-//     })
-//   })
+import { BigNumber, constants } from "ethers";
+import { ethers } from "hardhat";
+
+const { AddressZero } = constants;
+
+export function shouldBehaveLikeERC20(
+  name: String,
+  symbol: String,
+  decimals: Number,
+  initialBalance: BigNumber,
+  ...accounts: string[]
+) {
+  const [owner, other, thirdParty] = accounts;
+
+  it("有代币名称", async function () {
+    expect(await this.token.name()).be.equal(name);
+  });
+
+  it("有代币符号", async function () {
+    expect(await this.token.symbol()).be.equal(symbol);
+  });
+
+  it("有代币精度", async function () {
+    expect(await this.token.decimals()).to.be.equal(decimals);
+  });
+
+  describe("代币总量", function () {
+    it("代币总量等于初始供应量", async function () {
+      expect(await this.token.totalSupply()).to.be.equal(initialBalance);
+    });
+  });
+
+  describe("余额", function () {
+    describe("当请求的账户没有代币时", function () {
+      it("应该返回0", async function () {
+        expect(await this.token.balanceOf(other)).be.equal(0);
+      });
+    });
+    describe("当请求的账户有代币时", function () {
+      it("返回的余额等于该账户持有的代币数量", async function () {
+        expect(await this.token.balanceOf(owner)).be.equal(initialBalance);
+      });
+    });
+  });
+
+  describe("转账 transfer", function () {
+    shouldBehaveLikeERC20Transfer(initialBalance, owner, thirdParty);
+  });
+
+  describe("批准 approve", function () {
+    shouldBehaveLikeERC20Approve(initialBalance, owner, thirdParty);
+  });
+
+  describe("从指定账户转账 transfer from", function () {
+    describe("当收件人不是零地址时", function () {
+      describe("当消费者没有足够的批准余额时", function () {
+        beforeEach(async function () {
+          const spender = thirdParty;
+          await this.token.approve(spender, initialBalance, { from: owner });
+        });
+        describe("当所有者有足够的余额时", function () {
+          const amount = initialBalance;
+          it("转移请求的金额", async function () {
+            const spender = thirdParty;
+            const to = other;
+            const f = await ethers.getSigner(spender);
+            await this.token.connect(f).transferFrom(owner, to, amount, { from: spender });
+            const ownerBalance = await this.token.balanceOf(owner);
+            const toBalance = await this.token.balanceOf(to);
+
+            expect(ownerBalance.toString()).to.be.equal("0");
+            expect(toBalance.toString()).to.be.equal(amount.toString());
+          });
+
+          it("减少消费津贴", async function () {
+            const spender = thirdParty;
+            const to = other;
+            const f = await ethers.getSigner(spender);
+            await this.token.connect(f).transferFrom(owner, to, amount, { from: spender });
+            const allowance = await this.token.allowance(owner, spender);
+
+            expect(allowance.toString()).to.be.equal("0");
+          });
+
+          it("发出Transfer事件", async function () {
+            const spender = thirdParty;
+            const to = other;
+            const f = await ethers.getSigner(spender);
+            await expect(this.token.connect(f).transferFrom(owner, to, amount, { from: spender }))
+              .emit(this.token, "Transfer")
+              .withArgs(owner, to, amount);
+          });
+        });
+        describe("当所有者没有足够的余额时", function () {
+          const amount = initialBalance.add(1);
+
+          it("应该失败", async function () {
+            const spender = thirdParty;
+            const to = other;
+            const f = await ethers.getSigner(spender);
+            await expect(this.token.connect(f).transferFrom(owner, to, amount, { from: spender }))
+              .revertedWith("ERC20: insufficient allowance");
+          });
+        });
+      });
+      describe("当支出者没有足够的余额时", function () {
+        beforeEach(async function () {
+          const spender = thirdParty;
+          await this.token.approve(spender, 99, { from: owner });
+        });
+        describe("当所有者有足够的余额时", function () {
+          const amount = initialBalance;
+
+          it("应该失败", async function () {
+            const spender = thirdParty;
+            const to = other;
+            const f = await ethers.getSigner(spender);
+            await expect(this.token.connect(f).transferFrom(owner, to, amount, { from: spender }))
+              .revertedWith("ERC20: insufficient allowance");
+          });
+        });
+        describe("当所有者没有足够的余额时", function () {
+          const amount = initialBalance.add(1);
+
+          it("应该失败", async function () {
+            const spender = thirdParty;
+            const to = other;
+            const f = await ethers.getSigner(spender);
+            await expect(this.token.connect(f).transferFrom(owner, to, amount, { from: spender }))
+              .revertedWith("ERC20: insufficient allowance");
+          });
+        });
+      });
+    });
+    describe("当收件人是零地址时", function () {
+      const amount = initialBalance;
+      const to = AddressZero;
+
+      beforeEach(async function () {
+        const spender = thirdParty;
+        await this.token.approve(spender, amount, { from: owner });
+      });
+
+      it("应该失败", async function () {
+        const spender = thirdParty;
+        const f = await ethers.getSigner(spender);
+        await expect(this.token.connect(f).transferFrom(owner, to, amount, { from: spender }))
+          .revertedWith("ERC20: transfer to the zero address");
+      });
+    });
+  });
+
+  describe("减少津贴", function () {
+    describe("当支出者不是零地址时", function () {
+      function shouldDecreaseApproval(amount: any) {
+        describe("当之前没有批准的金额时", function () {
+          it("应该失败", async function () {
+            const spender = thirdParty;
+            await expect(this.token.decreaseAllowance(spender, amount, { from: owner }))
+              .revertedWith("ERC20: decreased allowance below zero");
+          });
+        });
+        describe("当消费者有一个批准的金额时", function () {
+          const approvedAmount = amount;
+          beforeEach(async function () {
+            const spender = thirdParty;
+            ({ logs: this.logs } = await this.token.approve(spender, approvedAmount, {
+              from: owner,
+            }));
+          });
+          it("发出Approval事件", async function () {
+            const spender = thirdParty;
+            await expect(this.token.decreaseAllowance(spender, approvedAmount, { from: owner }))
+              .emit(this.token, "Approval")
+              .withArgs(owner, spender, 0);
+          });
+          it("减少消费津贴减去要求的金额", async function () {
+            const spender = thirdParty;
+            await this.token.decreaseAllowance(spender, approvedAmount.sub(1), { from: owner });
+            const allowance = await this.token.allowance(owner, spender);
+
+            expect(allowance.toString()).to.be.equal("1");
+          });
+          it("删除所有余量时将余量设置为零", async function () {
+            const spender = thirdParty;
+            await this.token.decreaseAllowance(spender, approvedAmount, { from: owner });
+            const allowance = await this.token.allowance(owner, spender);
+
+            expect(allowance.toString()).to.be.equal("0");
+          });
+          it("删除超过全部限额时应该失败", async function () {
+            const spender = thirdParty;
+            await expect(
+              this.token.decreaseAllowance(spender, approvedAmount.add(1), { from: owner })
+            )
+              .revertedWith("ERC20: decreased allowance below zero");
+          });
+        });
+      }
+
+      describe("当发件人有足够的余额时", function () {
+        const amount = initialBalance;
+
+        shouldDecreaseApproval(amount);
+      });
+
+      describe("当发件人没有足够的余额时", function () {
+        const amount = initialBalance.add(1);
+
+        shouldDecreaseApproval(amount);
+      });
+    });
+
+    describe("当支出者是零地址时", function () {
+      const amount = initialBalance;
+      const spender = AddressZero;
+
+      it("应该失败", async function () {
+        await expect(this.token.decreaseAllowance(spender, amount, { from: owner }))
+          .revertedWith("ERC20: decreased allowance below zero");
+      });
+    });
+  });
+
+  describe("增加津贴", function () {
+    describe("当支出者不是零地址时", function () {
+      describe("当发件人有足够的余额时", function () {
+        it("发出 Approval 事件", async function () {
+          const amount = initialBalance;
+          const spender = thirdParty;
+          await expect(this.token.increaseAllowance(spender, amount, { from: owner }))
+            .emit(this.token, "Approval")
+            .withArgs(owner, spender, amount);
+        });
+
+        describe("当之前没有批准的金额时", function () {
+          it("批准请求的金额", async function () {
+            const amount = initialBalance;
+            const spender = thirdParty;
+            await this.token.increaseAllowance(spender, amount, { from: owner });
+            const allowance = await this.token.allowance(owner, spender);
+
+            expect(allowance.toString()).to.be.equal(amount.toString());
+          });
+        });
+
+        describe("当消费者有一个批准的金额时", function () {
+          beforeEach(async function () {
+            const spender = thirdParty;
+            await this.token.approve(spender, 1, { from: owner });
+          });
+
+          it("增加消费津贴加上要求的金额", async function () {
+            const amount = initialBalance;
+            const spender = thirdParty;
+            await this.token.increaseAllowance(spender, amount, { from: owner });
+            const allowance = await this.token.allowance(owner, spender);
+            const newAmount = amount.add(1);
+
+            expect(allowance.toString()).to.be.equal(newAmount.toString());
+          });
+        });
+      });
+      describe("当发件人没有足够的余额时", function () {
+        it("发出 Approval 事件", async function () {
+          const amount = initialBalance.add(1);
+          const spender = thirdParty;
+          await expect(this.token.increaseAllowance(spender, amount, { from: owner }))
+            .emit(this.token, "Approval")
+            .withArgs(owner, spender, amount);
+        });
+
+        describe("当之前没有批准的金额时", function () {
+          it("批准请求的金额", async function () {
+            const amount = initialBalance.add(1);
+            const spender = thirdParty;
+            await this.token.increaseAllowance(spender, amount, { from: owner });
+            const allowance = await this.token.allowance(owner, spender);
+
+            expect(allowance.toString()).to.be.equal(amount.toString());
+          });
+        });
+
+        describe("当消费者有一个批准的金额时", function () {
+          beforeEach(async function () {
+            const spender = thirdParty;
+            await this.token.approve(spender, 1, { from: owner });
+          });
+
+          it("增加消费津贴加上要求的金额", async function () {
+            const amount = initialBalance.add(1);
+            const spender = thirdParty;
+            await this.token.increaseAllowance(spender, amount, { from: owner });
+            const allowance = await this.token.allowance(owner, spender);
+            const newAmount = amount.add(1);
+
+            expect(allowance.toString()).to.be.equal(newAmount.toString());
+          });
+        });
+      });
+    });
+
+    describe("当支出者是零地址时", function () {
+      it("应该失败", async function () {
+        const amount = initialBalance;
+        const spender = AddressZero;
+        await expect(this.token.increaseAllowance(spender, amount, { from: owner })).revertedWith(
+          "ERC20: approve to the zero address"
+        );
+      });
+    });
+  });
+}
+
+export function shouldBehaveLikeERC20Transfer(initialBalance: BigNumber, from: string, to: string){
+  describe("当收款账户不是零地址时", function () {
+    describe("转账人没有足够余额时", function () {
+      const amount = initialBalance.add(1);
+      it("应该失败", async function () {
+        expect(this.token.transfer(to, amount, { from }))
+          .revertedWith("ERC20: transfer amount exceeds balance");
+      });
+    });
+    describe("转账人有足够余额时", function () {
+      const amount = initialBalance;
+      it("转账成功", async function () {
+        await this.token.transfer(to, amount, { from });
+        const ownerBalance = await this.token.balanceOf(from);
+        const toBalance = await this.token.balanceOf(to);
+        expect(ownerBalance.toString()).to.be.equal("0");
+        expect(toBalance.toString()).to.be.equal(amount.toString());
+      });
+      it("并且发出了Transfer事件", async function () {
+        await expect(this.token.transfer(to, amount))
+          .to.emit(this.token, "Transfer")
+          .withArgs(from, to, amount);
+      });
+    });
+  });
+  describe("当收款账户是零地址时", function () {
+    it("转账应该失败", async function () {
+      const to = AddressZero;
+      await expect(this.token.transfer(to, initialBalance, { from }))
+        .to.emit(this.token, "Transfer")
+        .revertedWith("ERC20: transfer to the zero address");
+    });
+  });
+}
+
+export function shouldBehaveLikeERC20Approve(supply: BigNumber, owner: string, spender: string){
+  describe("当支出账户不是零地址时", function () {
+    describe("当发件人有足够的余额时", function () {
+      const amount = supply;
+      it("发出批准事件", async function () {
+        await expect(this.token.approve(spender, amount, { from: owner }))
+          .to.emit(this.token, "Approval")
+          .withArgs(owner, spender, amount);
+      });
+
+      describe("当之前没有批准的金额时", function () {
+        it("批准请求的金额", async function () {
+          await this.token.approve(spender, amount, { from: owner });
+          const allowance = await this.token.allowance(owner, spender);
+          expect(allowance.toString()).to.be.equal(amount.toString());
+        });
+      });
+
+      describe("当消费者有一个批准的金额时", function () {
+        beforeEach(async function () {
+          await this.token.approve(spender, 1, { from: owner });
+        });
+        it("批准请求的金额并替换之前的金额", async function () {
+          await this.token.approve(spender, amount, { from: owner });
+          const allowance = await this.token.allowance(owner, spender);
+          expect(allowance.toString()).to.be.equal(amount.toString());
+        });
+      });
+    });
+    describe("当发件人没有足够的余额时", function () {
+      const amount = supply.add(1);
+      it("发出批准事件", async function () {
+        expect(this.token.approve(spender, amount, { from: owner }))
+          .to.emit(this.token, "Approval")
+          .withArgs(owner, spender, amount);
+      });
+
+      describe("当之前没有批准的金额时", function () {
+        it("批准请求的金额", async function () {
+          await this.token.approve(spender, amount, { from: owner });
+          const allowance = await this.token.allowance(owner, spender);
+          expect(allowance.toString()).to.be.equal(amount.toString());
+        });
+      });
+
+      describe("当消费者有一个批准的金额时", function () {
+        beforeEach(async function () {
+          await this.token.approve(spender, 1, { from: owner });
+        });
+        it("批准请求的金额并替换之前的金额", async function () {
+          await this.token.approve(spender, amount, { from: owner });
+          const allowance = await this.token.allowance(owner, spender);
+          expect(allowance.toString()).to.be.equal(amount.toString());
+        });
+      });
+    });
+  });
+
+  describe("当支出者是零地址时", function () {
+    const amount = supply;
+    const spender = AddressZero;
+    it("应该失败", async function () {
+      await expect(this.token.approve(spender, amount, { from: owner }))
+        .revertedWith("ERC20: approve to the zero address");
+    });
+  });
 }

@@ -3,14 +3,14 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 
 const blockchain: AppRouteModule = {
-  path: '/blockchain',
-  name: 'blockchain',
+  path: '/contracts',
+  name: 'contracts',
   component: LAYOUT,
-  redirect: '/blockchain/token',
+  redirect: '/contracts/token',
   meta: {
     orderNo: 11,
     icon: 'ion:grid-outline',
-    title: '区块链',
+    title: '智能合约',
   },
   children: [
     // {
@@ -32,12 +32,12 @@ const blockchain: AppRouteModule = {
       },
     },
     {
-      path: 'manage/:contractAddr',
-      name: 'manage',
+      path: 'erc20/manage/:contractAddr',
+      name: 'erc20Manage',
       component: () => import('/@/views/blockchain/token/manage.vue'),
       meta: {
         title: 'ERC20代币管理',
-        // carryParam: true,
+        hideMenu: true,
       },
     },
     {

@@ -11,11 +11,6 @@ export const useBlockchainStore = defineStore({
   state: () => ({
     serviceReceiverContractAddress: contractAddr,
   }),
-  getters: {
-    getAddr() {
-      return ls.get(SERVICE_RECEIVER_ADDR_KEY);
-    },
-  },
   actions: {
     setServiceReceiverContractAddress(contractAddress) {
       this.serviceReceiverContractAddress = contractAddress;
